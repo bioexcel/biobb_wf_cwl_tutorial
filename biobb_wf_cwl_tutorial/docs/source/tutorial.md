@@ -52,7 +52,7 @@ This tutorial aims to illustrate the process of **building up a CWL workflow** u
 
 ***
 
-<img src="logo.png" />
+<img src="_static/logo.png" />
 
 ***
 
@@ -227,7 +227,6 @@ inputs:
 
 The **outputs:** section describes the set of **final outputs** from the **workflow**. These outputs can be a collection of outputs from **different steps of the workflow**. Each output is a `key: value` pair. The `key` should be a unique identifier, and the value should be a dictionary (consisting of `key: value` pairs). These `keys` consists of `label`, which is a title or name for the output; `doc`, which is a longer description of what this output is; `type`, which is the data type expected; and `outputSource`, which connects the output parameter of a **particular step** to the **workflow final output parameter**.
 
-**Example**: 
 
 ```python
 outputs:
@@ -351,7 +350,7 @@ It is important to note that in order to properly run the **CWL workflow**, the 
 The **command line** is shown in the cell below:
 
 
-```bash
+```python
 # Run CWL workflow with CWL tool description reference implementation (cwltool).
 cwltool BioExcel-CWL-firstWorkflow.cwl BioExcel-CWL-firstWorkflow-job.yml
 ```
@@ -362,7 +361,7 @@ cwltool BioExcel-CWL-firstWorkflow.cwl BioExcel-CWL-firstWorkflow-job.yml
 The **execution of the workflow** will write information to the standard output such as the **step being performed**, the **way it is run** (command line, docker container, etc.), **inputs and outputs** used, and **state of each step** (success, failed). The next cell contains a **real output** for the **execution of our first example**:
 
 
-```bash
+```python
 Resolved 'BioExcel-CWL-firstWorkflow.cwl' to 'file:///PATH/biobb_wf_md_setup/cwl/BioExcel-CWL-firstWorkflow.cwl'
 [workflow BioExcel-CWL-firstWorkflow.cwl] start
 [step step1_pdb] start
@@ -450,7 +449,7 @@ Mandatory and optional **inputs** and **outputs** of every **building block** ca
 
 
 ```python
-  step1_pdb:
+ step1_pdb:
     label: Fetch PDB Structure
     doc: |
       Download a protein structure from the PDB database
@@ -1195,7 +1194,7 @@ It is worth to note that as this workflow is using different **BioExcel building
 The **command line** is shown in the cell below:
 
 
-```bash
+```python
 # Run CWL workflow with CWL tool description reference implementation (cwltool).
 cwltool BioExcel-CWL-MDSetup.cwl BioExcel-CWL-MDSetup-job.yml
 ```

@@ -13095,16 +13095,12 @@ div#notebook {
 <hr>
 <h3 id="Tutorial-Sections:">Tutorial Sections:<a class="anchor-link" href="#Tutorial-Sections:">&#182;</a></h3><ol>
 <li><a href="#intro">CWL workflows: Brief Introduction</a></li>
-</ol>
-<ol>
 <li><p><a href="#tools">BioExcel building blocks TOOLS CWL Descriptions</a></p>
 <ul>
 <li><a href="#toolcwl">Tool Building Block CWL Sections</a></li>
 <li><a href="#pdbcwl">Complete Pdb Building Block CWL description</a></li>
 </ul>
 </li>
-</ol>
-<ol>
 <li><p><a href="#workflows">BioExcel building blocks WORKFLOWS CWL Descriptions</a></p>
 <ul>
 <li><a href="#cwlheader">Header</a></li>
@@ -13117,8 +13113,6 @@ div#notebook {
 <li><a href="#wfoutput">Cwltool workflow output</a></li>
 </ul>
 </li>
-</ol>
-<ol>
 <li><p><a href="#mdsetup">Protein MD-Setup CWL workflow with BioExcel building blocks</a></p>
 <ul>
 <li><a href="#mdsteps">Steps</a></li>
@@ -13129,8 +13123,6 @@ div#notebook {
 <li><a href="#mdcwlrun">Running the CWL workflow</a></li>
 </ul>
 </li>
-</ol>
-<ol>
 <li><a href="#questions">Questions &amp; Comments</a></li>
 </ol>
 
@@ -13365,6 +13357,13 @@ div#notebook {
 
 <span class="n">cwlVersion</span><span class="p">:</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span>
 <span class="n">class</span><span class="p">:</span> <span class="n">Workflow</span>
+<span class="n">label</span><span class="p">:</span> <span class="n">Example</span> <span class="n">CWL</span> <span class="n">Header</span>
+<span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+  <span class="n">An</span> <span class="n">example</span> <span class="n">of</span> <span class="n">how</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="n">CWl</span> <span class="n">header</span><span class="o">.</span> <span class="n">We</span> <span class="n">have</span> <span class="n">specified</span> <span class="n">the</span> <span class="n">version</span>
+  <span class="n">of</span> <span class="n">CWL</span> <span class="n">that</span> <span class="n">we</span> <span class="n">are</span> <span class="n">using</span><span class="p">;</span> <span class="n">the</span> <span class="n">class</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">a</span> <span class="s1">&#39;workflow&#39;</span><span class="o">.</span>  <span class="n">The</span> <span class="n">label</span>
+  <span class="n">field</span> <span class="n">should</span> <span class="n">provide</span> <span class="n">a</span> <span class="n">short</span> <span class="n">title</span> <span class="ow">or</span> <span class="n">description</span> <span class="n">of</span> <span class="n">the</span> <span class="n">workflow</span> <span class="ow">and</span>
+  <span class="n">the</span> <span class="n">description</span> <span class="n">should</span> <span class="n">provide</span> <span class="n">a</span> <span class="n">longer</span> <span class="n">description</span> <span class="n">of</span> <span class="n">what</span> <span class="n">the</span> <span class="n">workflow</span>
+  <span class="n">doe</span><span class="o">.</span>
 </pre></div>
 
     </div>
@@ -13402,8 +13401,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a id="outputs"></a></p>
-<h3 id="Outputs:">Outputs:<a class="anchor-link" href="#Outputs:">&#182;</a></h3><p>The <strong>outputs section</strong> describes the set of <strong>final outputs</strong> from the <strong>workflow</strong>. These outputs can be a collection of outputs from <strong>different steps of the workflow</strong>. Each parameter consists of an <strong>identifier</strong>, a <strong>data type</strong>, and an <strong>outputSource</strong>, which connects the output parameter of a <strong>particular step</strong> to the <strong>workflow final output parameter</strong>.</p>
-<p><strong>Example</strong>: Step 1 of the workflow, download a <strong>protein structure</strong> from the <strong>PDB database</strong>. The <em>pdb</em> <strong>output</strong> is a <strong>file</strong> containing the <strong>protein structure</strong> in <strong>PDB format</strong>, which is connected to the output parameter <em>output_pdb_file</em> of the <strong>step1 of the workflow</strong> (<em>step1_pdb</em>).</p>
+<h3 id="Outputs:">Outputs:<a class="anchor-link" href="#Outputs:">&#182;</a></h3><p>The <strong>outputs:</strong> section describes the set of <strong>final outputs</strong> from the <strong>workflow</strong>. These outputs can be a collection of outputs from <strong>different steps of the workflow</strong>. Each output is a <code>key: value</code> pair. The <code>key</code> should be a unique identifier, and the value should be a dictionary (consisting of <code>key: value</code> pairs). These <code>keys</code> consists of <code>label</code>, which is a title or name for the output; <code>doc</code>, which is a longer description of what this output is; <code>type</code>, which is the data type expected; and <code>outputSource</code>, which connects the output parameter of a <strong>particular step</strong> to the <strong>workflow final output parameter</strong>.</p>
 
 </div>
 </div>
@@ -13413,10 +13411,16 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># CWL workflow outputs section example</span>
-<span class="n">outputs</span><span class="p">:</span>
-  <span class="n">pdb</span><span class="p">:</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">outputs</span><span class="p">:</span>
+  <span class="n">pdb</span><span class="p">:</span> <span class="c1">#unique identifier</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Protein</span> <span class="n">structure</span>  
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Step</span> <span class="mi">1</span> <span class="n">of</span> <span class="n">the</span> <span class="n">workflow</span><span class="p">,</span> <span class="n">download</span> <span class="n">a</span> <span class="s1">&#39;protein structure&#39;</span> <span class="kn">from</span> <span class="nn">the</span>
+      <span class="s1">&#39;PDB database&#39;</span><span class="o">.</span> <span class="n">The</span> <span class="o">*</span><span class="n">pdb</span><span class="o">*</span> <span class="s1">&#39;output&#39;</span> <span class="ow">is</span> <span class="n">a</span> <span class="s1">&#39;file&#39;</span> <span class="n">containing</span> <span class="n">the</span>
+      <span class="s1">&#39;protein structure&#39;</span> <span class="ow">in</span> <span class="s1">&#39;PDB format&#39;</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">connected</span> <span class="n">to</span> <span class="n">the</span>
+      <span class="n">output</span> <span class="n">parameter</span> <span class="o">*</span><span class="n">output_pdb_file</span><span class="o">*</span> <span class="n">of</span> <span class="n">the</span> <span class="s1">&#39;step1 of the workflow&#39;</span>
+      <span class="p">(</span><span class="o">*</span><span class="n">step1_pdb</span><span class="o">*</span><span class="p">)</span><span class="o">.</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">File</span> <span class="c1">#data type</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step1_pdb</span><span class="o">/</span><span class="n">output_pdb_file</span>
 </pre></div>
 
@@ -13442,15 +13446,22 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># CWL workflow steps section example</span>
-<span class="n">steps</span><span class="p">:</span>
   <span class="n">step1_pdb</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">pdb</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Fetch</span> <span class="n">PDB</span> <span class="n">Structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Download</span> <span class="n">a</span> <span class="n">protein</span> <span class="n">structure</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">PDB</span> <span class="n">database</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_io</span><span class="o">/</span><span class="n">mmb_api</span><span class="o">/</span><span class="n">pdb</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
-      <span class="n">config</span><span class="p">:</span> <span class="n">step1_properties</span>
+      <span class="n">output_pdb_path</span><span class="p">:</span> <span class="n">step1_pdb_name</span>
+      <span class="n">config</span><span class="p">:</span> <span class="n">step1_pdb_config</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_pdb_file</span><span class="p">]</span>
-        
+
   <span class="n">step2_fixsidechain</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">fix_side_chain</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Fix</span> <span class="n">Protein</span> <span class="n">structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Fix</span> <span class="n">the</span> <span class="n">side</span> <span class="n">chains</span><span class="p">,</span> <span class="n">adding</span> <span class="nb">any</span> <span class="n">side</span> <span class="n">chain</span> <span class="n">atoms</span> <span class="n">missing</span> <span class="ow">in</span> <span class="n">the</span>
+      <span class="n">original</span> <span class="n">structure</span><span class="o">.</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_model</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">fix_side_chain</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_pdb_path</span><span class="p">:</span> <span class="n">step1_pdb</span><span class="o">/</span><span class="n">output_pdb_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_pdb_file</span><span class="p">]</span>
@@ -13503,12 +13514,17 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Example of a short CWL workflow with BioExcel building blocks </span>
-
-<span class="c1"># !/usr/bin/env cwl-runner</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># !/usr/bin/env cwl-runner</span>
 
 <span class="n">cwlVersion</span><span class="p">:</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span>
 <span class="n">class</span><span class="p">:</span> <span class="n">Workflow</span>
+<span class="n">label</span><span class="p">:</span> <span class="n">Example</span> <span class="n">of</span> <span class="n">a</span> <span class="n">short</span> <span class="n">CWL</span> <span class="n">workflow</span> <span class="k">with</span> <span class="n">BioExcel</span> <span class="n">building</span> <span class="n">blocks</span>
+<span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+  <span class="n">Example</span> <span class="n">of</span> <span class="n">a</span> <span class="n">short</span> <span class="s1">&#39;CWL workflow&#39;</span> <span class="k">with</span> <span class="s1">&#39;BioExcel building blocks&#39;</span><span class="p">,</span> <span class="n">which</span>
+  <span class="n">retrieves</span> <span class="n">a</span> <span class="s1">&#39;PDB file&#39;</span> <span class="k">for</span> <span class="n">the</span> <span class="s1">&#39;Lysozyme protein structure&#39;</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">RCSB</span> <span class="n">PDB</span>
+  <span class="n">database</span> <span class="p">(</span><span class="s1">&#39;step1: pdb.cwl&#39;</span><span class="p">),</span> <span class="ow">and</span> <span class="n">fixes</span> <span class="n">the</span> <span class="n">possible</span> <span class="n">problems</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">structure</span><span class="p">,</span>
+  <span class="n">adding</span> <span class="s1">&#39;missing side chain atoms&#39;</span> <span class="k">if</span> <span class="n">needed</span> <span class="p">(</span><span class="s1">&#39;step2: fix_side_chain.cwl&#39;</span><span class="p">)</span><span class="o">.</span>
+
 <span class="n">inputs</span><span class="p">:</span>
   <span class="n">step1_properties</span><span class="p">:</span> <span class="s1">&#39;{&quot;pdb_code&quot; : &quot;1aki&quot;}&#39;</span>
   <span class="n">step1_output_name</span><span class="p">:</span> <span class="s1">&#39;tutorial_1aki.pdb&#39;</span>
@@ -13520,6 +13536,9 @@ div#notebook {
 
 <span class="n">steps</span><span class="p">:</span>
   <span class="n">step1_pdb</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Fetch</span> <span class="n">PDB</span> <span class="n">Structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Download</span> <span class="n">a</span> <span class="n">protein</span> <span class="n">structure</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">PDB</span> <span class="n">database</span>
     <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">pdb</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">output_pdb_path</span><span class="p">:</span> <span class="n">step1_output_name</span>
@@ -13527,6 +13546,10 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_pdb_file</span><span class="p">]</span>
         
   <span class="n">step2_fixsidechain</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Fix</span> <span class="n">Protein</span> <span class="n">structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Fix</span> <span class="n">the</span> <span class="n">side</span> <span class="n">chains</span><span class="p">,</span> <span class="n">adding</span> <span class="nb">any</span> <span class="n">side</span> <span class="n">chain</span> <span class="n">atoms</span> <span class="n">missing</span> <span class="ow">in</span> <span class="n">the</span>
+      <span class="n">original</span> <span class="n">structure</span><span class="o">.</span>
     <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">fix_side_chain</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_pdb_path</span><span class="p">:</span> <span class="n">step1_pdb</span><span class="o">/</span><span class="n">output_pdb_file</span>
@@ -13674,41 +13697,51 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">steps</span><span class="p">:</span>
-  <span class="n">step1_pdb</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">pdb</span><span class="o">.</span><span class="n">cwl</span>
+<div class=" highlight hl-ipython3"><pre><span></span> <span class="n">step1_pdb</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Fetch</span> <span class="n">PDB</span> <span class="n">Structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Download</span> <span class="n">a</span> <span class="n">protein</span> <span class="n">structure</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">PDB</span> <span class="n">database</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_io</span><span class="o">/</span><span class="n">mmb_api</span><span class="o">/</span><span class="n">pdb</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">output_pdb_path</span><span class="p">:</span> <span class="n">step1_pdb_name</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step1_pdb_config</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_pdb_file</span><span class="p">]</span>
 
   <span class="n">step2_fixsidechain</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">fix_side_chain</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Fix</span> <span class="n">Protein</span> <span class="n">structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Fix</span> <span class="n">the</span> <span class="n">side</span> <span class="n">chains</span><span class="p">,</span> <span class="n">adding</span> <span class="nb">any</span> <span class="n">side</span> <span class="n">chain</span> <span class="n">atoms</span> <span class="n">missing</span> <span class="ow">in</span> <span class="n">the</span>
+      <span class="n">original</span> <span class="n">structure</span><span class="o">.</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_model</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">fix_side_chain</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_pdb_path</span><span class="p">:</span> <span class="n">step1_pdb</span><span class="o">/</span><span class="n">output_pdb_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_pdb_file</span><span class="p">]</span>
 
   <span class="n">step3_pdb2gmx</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">pdb2gmx</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Create</span> <span class="n">Protein</span> <span class="n">System</span> <span class="n">Topology</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">pdb2gmx</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_pdb_path</span><span class="p">:</span> <span class="n">step2_fixsidechain</span><span class="o">/</span><span class="n">output_pdb_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_top_zip_file</span><span class="p">]</span>
 
   <span class="n">step4_editconf</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">editconf</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Create</span> <span class="n">Solvent</span> <span class="n">Box</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">editconf</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step3_pdb2gmx</span><span class="o">/</span><span class="n">output_gro_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_gro_file</span><span class="p">]</span>
 
   <span class="n">step5_solvate</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">solvate</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Fill</span> <span class="n">the</span> <span class="n">Box</span> <span class="k">with</span> <span class="n">Water</span> <span class="n">Molecules</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">solvate</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_solute_gro_path</span><span class="p">:</span> <span class="n">step4_editconf</span><span class="o">/</span><span class="n">output_gro_file</span>
       <span class="n">input_top_zip_path</span><span class="p">:</span> <span class="n">step3_pdb2gmx</span><span class="o">/</span><span class="n">output_top_zip_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_top_zip_file</span><span class="p">]</span>
 
   <span class="n">step6_grompp_genion</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Add</span> <span class="n">Ions</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step6_gppion_config</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step5_solvate</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -13716,7 +13749,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_tpr_file</span><span class="p">]</span>
 
   <span class="n">step7_genion</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">genion</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Add</span> <span class="n">Ions</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">genion</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step7_genion_config</span>
       <span class="n">input_tpr_path</span><span class="p">:</span> <span class="n">step6_grompp_genion</span><span class="o">/</span><span class="n">output_tpr_file</span>
@@ -13724,7 +13758,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_top_zip_file</span><span class="p">]</span>
 
   <span class="n">step8_grompp_min</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Energetically</span> <span class="n">Minimize</span> <span class="n">the</span> <span class="n">System</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step8_gppmin_config</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step7_genion</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -13732,20 +13767,24 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_tpr_file</span><span class="p">]</span>
 
   <span class="n">step9_mdrun_min</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Energetically</span> <span class="n">Minimize</span> <span class="n">the</span> <span class="n">System</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_tpr_path</span><span class="p">:</span> <span class="n">step8_grompp_min</span><span class="o">/</span><span class="n">output_tpr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_trr_file</span><span class="p">,</span> <span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_edr_file</span><span class="p">,</span> <span class="n">output_log_file</span><span class="p">]</span>
 
   <span class="n">step10_energy_min</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">energy</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Energetically</span> <span class="n">Minimize</span> <span class="n">the</span> <span class="n">System</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">3</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_energy</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step10_energy_min_config</span>
+      <span class="n">output_xvg_path</span><span class="p">:</span> <span class="n">step10_energy_min_name</span>
       <span class="n">input_energy_path</span><span class="p">:</span> <span class="n">step9_mdrun_min</span><span class="o">/</span><span class="n">output_edr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step11_grompp_nvt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NVT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step11_gppnvt_config</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step9_mdrun_min</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -13753,20 +13792,24 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_tpr_file</span><span class="p">]</span>
 
   <span class="n">step12_mdrun_nvt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NVT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_tpr_path</span><span class="p">:</span> <span class="n">step11_grompp_nvt</span><span class="o">/</span><span class="n">output_tpr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_trr_file</span><span class="p">,</span> <span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_edr_file</span><span class="p">,</span> <span class="n">output_log_file</span><span class="p">,</span> <span class="n">output_cpt_file</span><span class="p">]</span>
 
   <span class="n">step13_energy_nvt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">energy</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NVT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">3</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_energy</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step13_energy_nvt_config</span>
+      <span class="n">output_xvg_path</span><span class="p">:</span> <span class="n">step13_energy_nvt_name</span>
       <span class="n">input_energy_path</span><span class="p">:</span> <span class="n">step12_mdrun_nvt</span><span class="o">/</span><span class="n">output_edr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step14_grompp_npt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NPT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step14_gppnpt_config</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step12_mdrun_nvt</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -13775,20 +13818,24 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_tpr_file</span><span class="p">]</span>
 
   <span class="n">step15_mdrun_npt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NPT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_tpr_path</span><span class="p">:</span> <span class="n">step14_grompp_npt</span><span class="o">/</span><span class="n">output_tpr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_trr_file</span><span class="p">,</span> <span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_edr_file</span><span class="p">,</span> <span class="n">output_log_file</span><span class="p">,</span> <span class="n">output_cpt_file</span><span class="p">]</span>
 
   <span class="n">step16_energy_npt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">energy</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NPT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">3</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_energy</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step16_energy_npt_config</span>
+      <span class="n">output_xvg_path</span><span class="p">:</span> <span class="n">step16_energy_npt_name</span>
       <span class="n">input_energy_path</span><span class="p">:</span> <span class="n">step15_mdrun_npt</span><span class="o">/</span><span class="n">output_edr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step17_grompp_md</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Free</span> <span class="n">Molecular</span> <span class="n">Dynamics</span> <span class="n">Simulation</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step17_gppmd_config</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step15_mdrun_npt</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -13797,29 +13844,35 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_tpr_file</span><span class="p">]</span>
 
   <span class="n">step18_mdrun_md</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Free</span> <span class="n">Molecular</span> <span class="n">Dynamics</span> <span class="n">Simulation</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_tpr_path</span><span class="p">:</span> <span class="n">step17_grompp_md</span><span class="o">/</span><span class="n">output_tpr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_trr_file</span><span class="p">,</span> <span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_edr_file</span><span class="p">,</span> <span class="n">output_log_file</span><span class="p">,</span> <span class="n">output_cpt_file</span><span class="p">]</span>
 
   <span class="n">step19_rmsfirst</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">rms</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Post</span><span class="o">-</span><span class="n">processing</span> <span class="n">Resulting</span> <span class="mi">3</span><span class="n">D</span> <span class="n">Trajectory</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_rms</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step19_rmsfirst_config</span>
+      <span class="n">output_xvg_path</span><span class="p">:</span> <span class="n">step19_rmsfirst_name</span>
       <span class="n">input_structure_path</span><span class="p">:</span> <span class="n">step17_grompp_md</span><span class="o">/</span><span class="n">output_tpr_file</span>
       <span class="n">input_traj_path</span><span class="p">:</span> <span class="n">step18_mdrun_md</span><span class="o">/</span><span class="n">output_trr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step20_rmsexp</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">rms</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Post</span><span class="o">-</span><span class="n">processing</span> <span class="n">Resulting</span> <span class="mi">3</span><span class="n">D</span> <span class="n">Trajectory</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_rms</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step20_rmsexp_config</span>
+      <span class="n">output_xvg_path</span><span class="p">:</span> <span class="n">step20_rmsexp_name</span>
       <span class="n">input_structure_path</span><span class="p">:</span> <span class="n">step8_grompp_min</span><span class="o">/</span><span class="n">output_tpr_file</span>
       <span class="n">input_traj_path</span><span class="p">:</span> <span class="n">step18_mdrun_md</span><span class="o">/</span><span class="n">output_trr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step21_rgyr</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">rgyr</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Post</span><span class="o">-</span><span class="n">processing</span> <span class="n">Resulting</span> <span class="mi">3</span><span class="n">D</span> <span class="n">Trajectory</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">3</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_rgyr</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step21_rgyr_config</span>
       <span class="n">input_structure_path</span><span class="p">:</span> <span class="n">step8_grompp_min</span><span class="o">/</span><span class="n">output_tpr_file</span>
@@ -13827,7 +13880,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step22_image</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">gmximage</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Post</span><span class="o">-</span><span class="n">processing</span> <span class="n">Resulting</span> <span class="mi">3</span><span class="n">D</span> <span class="n">Trajectory</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">4</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_image</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step22_image_config</span>
       <span class="n">input_top_path</span><span class="p">:</span> <span class="n">step17_grompp_md</span><span class="o">/</span><span class="n">output_tpr_file</span>
@@ -13835,7 +13889,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_traj_file</span><span class="p">]</span>
 
   <span class="n">step23_dry</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">gmxtrjconvstr</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Post</span><span class="o">-</span><span class="n">processing</span> <span class="n">Resulting</span> <span class="mi">3</span><span class="n">D</span> <span class="n">Trajectory</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">5</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_trjconv_str</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step23_dry_config</span>
       <span class="n">input_structure_path</span><span class="p">:</span> <span class="n">step18_mdrun_md</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -13943,42 +13998,97 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">outputs</span><span class="p">:</span>
   <span class="n">trr</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Trajectories</span> <span class="o">-</span> <span class="n">Raw</span> <span class="n">trajectory</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Raw</span> <span class="n">trajectory</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">free</span> <span class="n">simulation</span> <span class="n">step</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step18_mdrun_md</span><span class="o">/</span><span class="n">output_trr_file</span>
+    
   <span class="n">trr_imaged_dry</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Trajectories</span> <span class="o">-</span> <span class="n">Post</span><span class="o">-</span><span class="n">processed</span> <span class="n">trajectory</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Post</span><span class="o">-</span><span class="n">processed</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">dehydrated</span><span class="p">,</span> <span class="n">imaged</span> <span class="p">(</span><span class="n">rotations</span> <span class="ow">and</span> <span class="n">translations</span>
+      <span class="n">removed</span><span class="p">)</span> <span class="ow">and</span> <span class="n">centered</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step22_image</span><span class="o">/</span><span class="n">output_traj_file</span>
+    
   <span class="n">gro_dry</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Resulting</span> <span class="n">protein</span> <span class="n">structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Resulting</span> <span class="n">protein</span> <span class="n">structure</span> <span class="n">taken</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">post</span><span class="o">-</span><span class="n">processed</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">to</span>
+      <span class="n">be</span> <span class="n">used</span> <span class="k">as</span> <span class="n">a</span> <span class="n">topology</span><span class="p">,</span> <span class="n">usually</span> <span class="k">for</span> <span class="n">visualization</span> <span class="n">purposes</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step23_dry</span><span class="o">/</span><span class="n">output_str_file</span>
+    
   <span class="n">gro</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Structures</span> <span class="o">-</span> <span class="n">Raw</span> <span class="n">structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Raw</span> <span class="n">structure</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">free</span> <span class="n">simulation</span> <span class="n">step</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step18_mdrun_md</span><span class="o">/</span><span class="n">output_gro_file</span>
+
   <span class="n">cpt</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Checkpoint</span> <span class="n">file</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">GROMACS</span> <span class="n">portable</span> <span class="n">checkpoint</span> <span class="n">file</span><span class="p">,</span> <span class="n">allowing</span> <span class="n">to</span> <span class="n">restore</span> <span class="p">(</span><span class="k">continue</span><span class="p">)</span> <span class="n">the</span>
+      <span class="n">simulation</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">last</span> <span class="n">step</span> <span class="n">of</span> <span class="n">the</span> <span class="n">setup</span> <span class="n">process</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step18_mdrun_md</span><span class="o">/</span><span class="n">output_cpt_file</span>
+
   <span class="n">tpr</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Topologies</span> <span class="n">GROMACS</span> <span class="n">portable</span> <span class="n">binary</span> <span class="n">run</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">GROMACS</span> <span class="n">portable</span> <span class="n">binary</span> <span class="n">run</span> <span class="nb">input</span> <span class="n">file</span><span class="p">,</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">starting</span> <span class="n">structure</span>
+      <span class="n">of</span> <span class="n">the</span> <span class="n">simulation</span><span class="p">,</span> <span class="n">the</span> <span class="n">molecular</span> <span class="n">topology</span> <span class="ow">and</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">simulation</span> <span class="n">parameters</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step17_grompp_md</span><span class="o">/</span><span class="n">output_tpr_file</span>
+
   <span class="n">top</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">GROMACS</span> <span class="n">topology</span> <span class="n">file</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">GROMACS</span> <span class="n">topology</span> <span class="n">file</span><span class="p">,</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">molecular</span> <span class="n">topology</span> <span class="ow">in</span> <span class="n">an</span> <span class="n">ASCII</span>
+      <span class="n">readable</span> <span class="nb">format</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step7_genion</span><span class="o">/</span><span class="n">output_top_zip_file</span>
+    
   <span class="n">xvg_min</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">System</span> <span class="n">Setup</span> <span class="n">Observables</span> <span class="o">-</span> <span class="n">Potential</span> <span class="n">Energy</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Potential</span> <span class="n">energy</span> <span class="n">of</span> <span class="n">the</span> <span class="n">system</span> <span class="n">during</span> <span class="n">the</span> <span class="n">minimization</span> <span class="n">step</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step10_energy_min</span><span class="o">/</span><span class="n">output_xvg_file</span>
+
   <span class="n">xvg_nvt</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">System</span> <span class="n">Setup</span> <span class="n">Observables</span> <span class="o">-</span> <span class="n">Temperature</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Temperature</span> <span class="n">of</span> <span class="n">the</span> <span class="n">system</span> <span class="n">during</span> <span class="n">the</span> <span class="n">NVT</span> <span class="n">equilibration</span> <span class="n">step</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step13_energy_nvt</span><span class="o">/</span><span class="n">output_xvg_file</span>
+    
   <span class="n">xvg_npt</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">System</span> <span class="n">Setup</span> <span class="n">Observables</span> <span class="o">-</span> <span class="n">Pressure</span> <span class="ow">and</span> <span class="n">density</span> 
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step16_energy_npt</span><span class="o">/</span><span class="n">output_xvg_file</span>
+    
   <span class="n">xvg_rmsfirst</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Simulation</span> <span class="n">Analysis</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Root</span> <span class="n">Mean</span> <span class="n">Square</span> <span class="n">deviation</span> <span class="p">(</span><span class="n">RMSd</span><span class="p">)</span> <span class="n">throughout</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">free</span> <span class="n">simulation</span>
+      <span class="n">step</span> <span class="n">against</span> <span class="n">the</span> <span class="n">first</span> <span class="n">snapshot</span> <span class="n">of</span> <span class="n">the</span> <span class="n">trajectory</span> <span class="p">(</span><span class="n">equilibrated</span> <span class="n">system</span><span class="p">)</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step19_rmsfirst</span><span class="o">/</span><span class="n">output_xvg_file</span>
   <span class="n">xvg_rmsexp</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Simulation</span> <span class="n">Analysis</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Root</span> <span class="n">Mean</span> <span class="n">Square</span> <span class="n">deviation</span> <span class="p">(</span><span class="n">RMSd</span><span class="p">)</span> <span class="n">throughout</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">free</span> <span class="n">simulation</span>
+      <span class="n">step</span> <span class="n">against</span> <span class="n">the</span> <span class="n">experimental</span> <span class="n">structure</span> <span class="p">(</span><span class="n">minimized</span> <span class="n">system</span><span class="p">)</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step20_rmsexp</span><span class="o">/</span><span class="n">output_xvg_file</span>
+    
   <span class="n">xvg_rgyr</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Simulation</span> <span class="n">Analysis</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Radius</span> <span class="n">of</span> <span class="n">Gyration</span> <span class="p">(</span><span class="n">RGyr</span><span class="p">)</span> <span class="n">of</span> <span class="n">the</span> <span class="n">molecule</span> <span class="n">throughout</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">free</span> <span class="n">simulation</span> <span class="n">step</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step21_rgyr</span><span class="o">/</span><span class="n">output_xvg_file</span>
 </pre></div>
@@ -14035,80 +14145,146 @@ div#notebook {
 
 <span class="n">outputs</span><span class="p">:</span>
   <span class="n">trr</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Trajectories</span> <span class="o">-</span> <span class="n">Raw</span> <span class="n">trajectory</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Raw</span> <span class="n">trajectory</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">free</span> <span class="n">simulation</span> <span class="n">step</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step18_mdrun_md</span><span class="o">/</span><span class="n">output_trr_file</span>
+    
   <span class="n">trr_imaged_dry</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Trajectories</span> <span class="o">-</span> <span class="n">Post</span><span class="o">-</span><span class="n">processed</span> <span class="n">trajectory</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Post</span><span class="o">-</span><span class="n">processed</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">dehydrated</span><span class="p">,</span> <span class="n">imaged</span> <span class="p">(</span><span class="n">rotations</span> <span class="ow">and</span> <span class="n">translations</span>
+      <span class="n">removed</span><span class="p">)</span> <span class="ow">and</span> <span class="n">centered</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step22_image</span><span class="o">/</span><span class="n">output_traj_file</span>
+    
   <span class="n">gro_dry</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Resulting</span> <span class="n">protein</span> <span class="n">structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Resulting</span> <span class="n">protein</span> <span class="n">structure</span> <span class="n">taken</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">post</span><span class="o">-</span><span class="n">processed</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">to</span>
+      <span class="n">be</span> <span class="n">used</span> <span class="k">as</span> <span class="n">a</span> <span class="n">topology</span><span class="p">,</span> <span class="n">usually</span> <span class="k">for</span> <span class="n">visualization</span> <span class="n">purposes</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step23_dry</span><span class="o">/</span><span class="n">output_str_file</span>
+    
   <span class="n">gro</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Structures</span> <span class="o">-</span> <span class="n">Raw</span> <span class="n">structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Raw</span> <span class="n">structure</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">free</span> <span class="n">simulation</span> <span class="n">step</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step18_mdrun_md</span><span class="o">/</span><span class="n">output_gro_file</span>
+
   <span class="n">cpt</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Checkpoint</span> <span class="n">file</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">GROMACS</span> <span class="n">portable</span> <span class="n">checkpoint</span> <span class="n">file</span><span class="p">,</span> <span class="n">allowing</span> <span class="n">to</span> <span class="n">restore</span> <span class="p">(</span><span class="k">continue</span><span class="p">)</span> <span class="n">the</span>
+      <span class="n">simulation</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">last</span> <span class="n">step</span> <span class="n">of</span> <span class="n">the</span> <span class="n">setup</span> <span class="n">process</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step18_mdrun_md</span><span class="o">/</span><span class="n">output_cpt_file</span>
+
   <span class="n">tpr</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Topologies</span> <span class="n">GROMACS</span> <span class="n">portable</span> <span class="n">binary</span> <span class="n">run</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">GROMACS</span> <span class="n">portable</span> <span class="n">binary</span> <span class="n">run</span> <span class="nb">input</span> <span class="n">file</span><span class="p">,</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">starting</span> <span class="n">structure</span>
+      <span class="n">of</span> <span class="n">the</span> <span class="n">simulation</span><span class="p">,</span> <span class="n">the</span> <span class="n">molecular</span> <span class="n">topology</span> <span class="ow">and</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">simulation</span> <span class="n">parameters</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step17_grompp_md</span><span class="o">/</span><span class="n">output_tpr_file</span>
+
   <span class="n">top</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">GROMACS</span> <span class="n">topology</span> <span class="n">file</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">GROMACS</span> <span class="n">topology</span> <span class="n">file</span><span class="p">,</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">molecular</span> <span class="n">topology</span> <span class="ow">in</span> <span class="n">an</span> <span class="n">ASCII</span>
+      <span class="n">readable</span> <span class="nb">format</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step7_genion</span><span class="o">/</span><span class="n">output_top_zip_file</span>
+    
   <span class="n">xvg_min</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">System</span> <span class="n">Setup</span> <span class="n">Observables</span> <span class="o">-</span> <span class="n">Potential</span> <span class="n">Energy</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Potential</span> <span class="n">energy</span> <span class="n">of</span> <span class="n">the</span> <span class="n">system</span> <span class="n">during</span> <span class="n">the</span> <span class="n">minimization</span> <span class="n">step</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step10_energy_min</span><span class="o">/</span><span class="n">output_xvg_file</span>
+
   <span class="n">xvg_nvt</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">System</span> <span class="n">Setup</span> <span class="n">Observables</span> <span class="o">-</span> <span class="n">Temperature</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Temperature</span> <span class="n">of</span> <span class="n">the</span> <span class="n">system</span> <span class="n">during</span> <span class="n">the</span> <span class="n">NVT</span> <span class="n">equilibration</span> <span class="n">step</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step13_energy_nvt</span><span class="o">/</span><span class="n">output_xvg_file</span>
+    
   <span class="n">xvg_npt</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">System</span> <span class="n">Setup</span> <span class="n">Observables</span> <span class="o">-</span> <span class="n">Pressure</span> <span class="ow">and</span> <span class="n">density</span> 
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step16_energy_npt</span><span class="o">/</span><span class="n">output_xvg_file</span>
+    
   <span class="n">xvg_rmsfirst</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Simulation</span> <span class="n">Analysis</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Root</span> <span class="n">Mean</span> <span class="n">Square</span> <span class="n">deviation</span> <span class="p">(</span><span class="n">RMSd</span><span class="p">)</span> <span class="n">throughout</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">free</span> <span class="n">simulation</span>
+      <span class="n">step</span> <span class="n">against</span> <span class="n">the</span> <span class="n">first</span> <span class="n">snapshot</span> <span class="n">of</span> <span class="n">the</span> <span class="n">trajectory</span> <span class="p">(</span><span class="n">equilibrated</span> <span class="n">system</span><span class="p">)</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step19_rmsfirst</span><span class="o">/</span><span class="n">output_xvg_file</span>
   <span class="n">xvg_rmsexp</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Simulation</span> <span class="n">Analysis</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Root</span> <span class="n">Mean</span> <span class="n">Square</span> <span class="n">deviation</span> <span class="p">(</span><span class="n">RMSd</span><span class="p">)</span> <span class="n">throughout</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">free</span> <span class="n">simulation</span>
+      <span class="n">step</span> <span class="n">against</span> <span class="n">the</span> <span class="n">experimental</span> <span class="n">structure</span> <span class="p">(</span><span class="n">minimized</span> <span class="n">system</span><span class="p">)</span><span class="o">.</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step20_rmsexp</span><span class="o">/</span><span class="n">output_xvg_file</span>
+    
   <span class="n">xvg_rgyr</span><span class="p">:</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Simulation</span> <span class="n">Analysis</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Radius</span> <span class="n">of</span> <span class="n">Gyration</span> <span class="p">(</span><span class="n">RGyr</span><span class="p">)</span> <span class="n">of</span> <span class="n">the</span> <span class="n">molecule</span> <span class="n">throughout</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">free</span> <span class="n">simulation</span> <span class="n">step</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">File</span>
     <span class="n">outputSource</span><span class="p">:</span> <span class="n">step21_rgyr</span><span class="o">/</span><span class="n">output_xvg_file</span>
 
 <span class="n">steps</span><span class="p">:</span>
   <span class="n">step1_pdb</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">pdb</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Fetch</span> <span class="n">PDB</span> <span class="n">Structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Download</span> <span class="n">a</span> <span class="n">protein</span> <span class="n">structure</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">PDB</span> <span class="n">database</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_io</span><span class="o">/</span><span class="n">mmb_api</span><span class="o">/</span><span class="n">pdb</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">output_pdb_path</span><span class="p">:</span> <span class="n">step1_pdb_name</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step1_pdb_config</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_pdb_file</span><span class="p">]</span>
 
   <span class="n">step2_fixsidechain</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">fix_side_chain</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Fix</span> <span class="n">Protein</span> <span class="n">structure</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="o">|</span>
+      <span class="n">Fix</span> <span class="n">the</span> <span class="n">side</span> <span class="n">chains</span><span class="p">,</span> <span class="n">adding</span> <span class="nb">any</span> <span class="n">side</span> <span class="n">chain</span> <span class="n">atoms</span> <span class="n">missing</span> <span class="ow">in</span> <span class="n">the</span>
+      <span class="n">original</span> <span class="n">structure</span><span class="o">.</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_model</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">fix_side_chain</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_pdb_path</span><span class="p">:</span> <span class="n">step1_pdb</span><span class="o">/</span><span class="n">output_pdb_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_pdb_file</span><span class="p">]</span>
 
   <span class="n">step3_pdb2gmx</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">pdb2gmx</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Create</span> <span class="n">Protein</span> <span class="n">System</span> <span class="n">Topology</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">pdb2gmx</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_pdb_path</span><span class="p">:</span> <span class="n">step2_fixsidechain</span><span class="o">/</span><span class="n">output_pdb_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_top_zip_file</span><span class="p">]</span>
 
   <span class="n">step4_editconf</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">editconf</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Create</span> <span class="n">Solvent</span> <span class="n">Box</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">editconf</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step3_pdb2gmx</span><span class="o">/</span><span class="n">output_gro_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_gro_file</span><span class="p">]</span>
 
   <span class="n">step5_solvate</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">solvate</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Fill</span> <span class="n">the</span> <span class="n">Box</span> <span class="k">with</span> <span class="n">Water</span> <span class="n">Molecules</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">solvate</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_solute_gro_path</span><span class="p">:</span> <span class="n">step4_editconf</span><span class="o">/</span><span class="n">output_gro_file</span>
       <span class="n">input_top_zip_path</span><span class="p">:</span> <span class="n">step3_pdb2gmx</span><span class="o">/</span><span class="n">output_top_zip_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_top_zip_file</span><span class="p">]</span>
 
   <span class="n">step6_grompp_genion</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Add</span> <span class="n">Ions</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step6_gppion_config</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step5_solvate</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -14116,7 +14292,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_tpr_file</span><span class="p">]</span>
 
   <span class="n">step7_genion</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">genion</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Add</span> <span class="n">Ions</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">genion</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step7_genion_config</span>
       <span class="n">input_tpr_path</span><span class="p">:</span> <span class="n">step6_grompp_genion</span><span class="o">/</span><span class="n">output_tpr_file</span>
@@ -14124,7 +14301,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_top_zip_file</span><span class="p">]</span>
 
   <span class="n">step8_grompp_min</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Energetically</span> <span class="n">Minimize</span> <span class="n">the</span> <span class="n">System</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step8_gppmin_config</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step7_genion</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -14132,13 +14310,15 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_tpr_file</span><span class="p">]</span>
 
   <span class="n">step9_mdrun_min</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Energetically</span> <span class="n">Minimize</span> <span class="n">the</span> <span class="n">System</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_tpr_path</span><span class="p">:</span> <span class="n">step8_grompp_min</span><span class="o">/</span><span class="n">output_tpr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_trr_file</span><span class="p">,</span> <span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_edr_file</span><span class="p">,</span> <span class="n">output_log_file</span><span class="p">]</span>
 
   <span class="n">step10_energy_min</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">energy</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Energetically</span> <span class="n">Minimize</span> <span class="n">the</span> <span class="n">System</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">3</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_energy</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step10_energy_min_config</span>
       <span class="n">output_xvg_path</span><span class="p">:</span> <span class="n">step10_energy_min_name</span>
@@ -14146,7 +14326,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step11_grompp_nvt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NVT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step11_gppnvt_config</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step9_mdrun_min</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -14154,13 +14335,15 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_tpr_file</span><span class="p">]</span>
 
   <span class="n">step12_mdrun_nvt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NVT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_tpr_path</span><span class="p">:</span> <span class="n">step11_grompp_nvt</span><span class="o">/</span><span class="n">output_tpr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_trr_file</span><span class="p">,</span> <span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_edr_file</span><span class="p">,</span> <span class="n">output_log_file</span><span class="p">,</span> <span class="n">output_cpt_file</span><span class="p">]</span>
 
   <span class="n">step13_energy_nvt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">energy</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NVT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">3</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_energy</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step13_energy_nvt_config</span>
       <span class="n">output_xvg_path</span><span class="p">:</span> <span class="n">step13_energy_nvt_name</span>
@@ -14168,7 +14351,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step14_grompp_npt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NPT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step14_gppnpt_config</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step12_mdrun_nvt</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -14177,13 +14361,15 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_tpr_file</span><span class="p">]</span>
 
   <span class="n">step15_mdrun_npt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NPT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_tpr_path</span><span class="p">:</span> <span class="n">step14_grompp_npt</span><span class="o">/</span><span class="n">output_tpr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_trr_file</span><span class="p">,</span> <span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_edr_file</span><span class="p">,</span> <span class="n">output_log_file</span><span class="p">,</span> <span class="n">output_cpt_file</span><span class="p">]</span>
 
   <span class="n">step16_energy_npt</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">energy</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Equilibrate</span> <span class="n">the</span> <span class="n">System</span> <span class="p">(</span><span class="n">NPT</span><span class="p">)</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">3</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_energy</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step16_energy_npt_config</span>
       <span class="n">output_xvg_path</span><span class="p">:</span> <span class="n">step16_energy_npt_name</span>
@@ -14191,7 +14377,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step17_grompp_md</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Free</span> <span class="n">Molecular</span> <span class="n">Dynamics</span> <span class="n">Simulation</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">grompp</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step17_gppmd_config</span>
       <span class="n">input_gro_path</span><span class="p">:</span> <span class="n">step15_mdrun_npt</span><span class="o">/</span><span class="n">output_gro_file</span>
@@ -14200,13 +14387,15 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_tpr_file</span><span class="p">]</span>
 
   <span class="n">step18_mdrun_md</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Free</span> <span class="n">Molecular</span> <span class="n">Dynamics</span> <span class="n">Simulation</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_md</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">mdrun</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">input_tpr_path</span><span class="p">:</span> <span class="n">step17_grompp_md</span><span class="o">/</span><span class="n">output_tpr_file</span>
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_trr_file</span><span class="p">,</span> <span class="n">output_gro_file</span><span class="p">,</span> <span class="n">output_edr_file</span><span class="p">,</span> <span class="n">output_log_file</span><span class="p">,</span> <span class="n">output_cpt_file</span><span class="p">]</span>
 
   <span class="n">step19_rmsfirst</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">rms</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Post</span><span class="o">-</span><span class="n">processing</span> <span class="n">Resulting</span> <span class="mi">3</span><span class="n">D</span> <span class="n">Trajectory</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">1</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_rms</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step19_rmsfirst_config</span>
       <span class="n">output_xvg_path</span><span class="p">:</span> <span class="n">step19_rmsfirst_name</span>
@@ -14215,7 +14404,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step20_rmsexp</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">rms</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Post</span><span class="o">-</span><span class="n">processing</span> <span class="n">Resulting</span> <span class="mi">3</span><span class="n">D</span> <span class="n">Trajectory</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">2</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_rms</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step20_rmsexp_config</span>
       <span class="n">output_xvg_path</span><span class="p">:</span> <span class="n">step20_rmsexp_name</span>
@@ -14224,7 +14414,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step21_rgyr</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">rgyr</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Post</span><span class="o">-</span><span class="n">processing</span> <span class="n">Resulting</span> <span class="mi">3</span><span class="n">D</span> <span class="n">Trajectory</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">3</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_rgyr</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step21_rgyr_config</span>
       <span class="n">input_structure_path</span><span class="p">:</span> <span class="n">step8_grompp_min</span><span class="o">/</span><span class="n">output_tpr_file</span>
@@ -14232,7 +14423,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_xvg_file</span><span class="p">]</span>
 
   <span class="n">step22_image</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">gmximage</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Post</span><span class="o">-</span><span class="n">processing</span> <span class="n">Resulting</span> <span class="mi">3</span><span class="n">D</span> <span class="n">Trajectory</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">4</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_image</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step22_image_config</span>
       <span class="n">input_top_path</span><span class="p">:</span> <span class="n">step17_grompp_md</span><span class="o">/</span><span class="n">output_tpr_file</span>
@@ -14240,7 +14432,8 @@ div#notebook {
     <span class="n">out</span><span class="p">:</span> <span class="p">[</span><span class="n">output_traj_file</span><span class="p">]</span>
 
   <span class="n">step23_dry</span><span class="p">:</span>
-    <span class="n">run</span><span class="p">:</span> <span class="n">biobb_adapters</span><span class="o">/</span><span class="n">gmxtrjconvstr</span><span class="o">.</span><span class="n">cwl</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Post</span><span class="o">-</span><span class="n">processing</span> <span class="n">Resulting</span> <span class="mi">3</span><span class="n">D</span> <span class="n">Trajectory</span> <span class="o">-</span> <span class="n">part</span> <span class="mi">5</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">biobb</span><span class="o">/</span><span class="n">biobb_adapters</span><span class="o">/</span><span class="n">cwl</span><span class="o">/</span><span class="n">biobb_analysis</span><span class="o">/</span><span class="n">gromacs</span><span class="o">/</span><span class="n">gmx_trjconv_str</span><span class="o">.</span><span class="n">cwl</span>
     <span class="ow">in</span><span class="p">:</span>
       <span class="n">config</span><span class="p">:</span> <span class="n">step23_dry_config</span>
       <span class="n">input_structure_path</span><span class="p">:</span> <span class="n">step18_mdrun_md</span><span class="o">/</span><span class="n">output_gro_file</span>
